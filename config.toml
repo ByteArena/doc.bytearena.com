@@ -1,0 +1,5 @@
+baseURL = "http://example.org/"
+languageCode = "en-us"
+title = "Byte Arena Docs"
+theme = "badoc"
+pygmentsCodeFences = true

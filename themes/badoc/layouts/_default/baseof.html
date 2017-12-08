@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode | default " en-us " }}">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>{{ block "title" . }}{{ .Site.Title }} {{ end }}</title>
+{{ with .Site.Params.description }}
+<meta name="description" content="{{ . }}">{{ end }} {{ with .Site.Params.author }}
+<meta name="author" content="{{ . }}">{{ end }}
+<link rel="stylesheet" href="/css/style.css" media="screen">
+</head>
+
+<body>
+    <div id="leftbar" class="column">
+        <div class="top-left"></div>
+        <div class="bottom bottom-left">{{ block "sidebar" . }} {{ partial "sidebar" . }} {{ end }}</div>
+    </div>
+    <div id="rightpanel" class="column">
+        <div class="top-right">
+            <div class="inner">
+                {{ block "header" . }} {{ partial "header.html" . }} {{ end }}
+            </div>
+        </div>
+        <div class="bottom bottom-right">
+            <div class="inner">
+                {{ block "main" . }}{{ end }}
+            </div>
+        </div>
+        <div class="footer-right">
+            <div class="inner">
+                <div class="left pull-left">
+                    <a href="https://get.bytearena.com">Get Byte Arena</a>
+                </div>
+                <div class="right pull-right">
+                    Edit this page on GitHub:
+                    <a href="https://github.com/ByteArena/doc.bytearena.com/blob/master/content/{{ .File.Path }}" style="color: white;"> {{ .File.Path }}</a>.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/menuactive.js" defer async></script>
+    <script src="/js/headinglinks.js" defer async></script>
+    <script src="/js/burger.js" defer async></script>
+    <script src="/js/youtube-async.js" defer async></script>
+</body>
+
+</html>

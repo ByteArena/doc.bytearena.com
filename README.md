@@ -1,4 +1,4 @@
-`# doc.bytearena.com
+# doc.bytearena.com
 
 The documentation for Byte Arena. Read it on https://doc.bytearena.com
 

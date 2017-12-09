@@ -3,7 +3,9 @@ Title: Deathmatch game mode
 Date: 2017-12-01
 ---
 
-In its current state, Byte Arena features a traditional Deathmatch Game Mode. In the future, more Game Modes will be supported, including Team Deathmatch, Capture The Flag and Racing simulations.
+In its current state, Byte Arena features a traditional Deathmatch Game Mode.
+
+In the future, more Game Modes will be supported, including Team Deathmatch, Capture The Flag and Speed Race.
 
 # The Deathmatch
 

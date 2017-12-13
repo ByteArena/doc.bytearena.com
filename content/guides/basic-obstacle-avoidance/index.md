@@ -11,7 +11,7 @@ If you've not done it already, please complete the [Getting Started guide](/guid
 
 ## The final code
 
-Here's what our `src/index.js` will look like when we're finished with this guide.
+Here's what our `src/index.js` will look like when we are finished with this guide.
 
 ```js
 // import SDK and vector facilities to ease development
@@ -160,9 +160,9 @@ const navigate = perception => {
 };
 ```
 
-We've got one move per tick, so **we've got to decide wether to dodge an obstacle or explore the map on each tick.**
+We have only one move per tick, so **we have to decide wether to dodge an obstacle or explore the map on each tick.**
 
-In our basic implementation, we always give the priority to dodging obstacles. So if the obstacle avoidance algorithm feeds us a vector steering away from an obstacle, we use it inconditionally, otherwise it's just business as usual.
+In our basic implementation, we always give the priority to dodging obstacles. So if the obstacle avoidance algorithm feeds us a vector steering away from an obstacle, we use it unconditionally, otherwise it's just business as usual.
 
 ### The obstacle avoidance function
 
@@ -190,7 +190,7 @@ const avoidObstables = perception => {
 
 The job of this function is to give us a vector steering away from obstacles we might hit soon, or `null` if there isn't any.
 
-It's basicaly a loop iterating over every obstacle we've got in our field of view, and determining the best action to take regarding this obstacle.
+It's basicaly a loop iterating over every obstacle we have in our field of view, and determining the best action to take regarding this obstacle.
 
 #### Algorithm for our basic obstacle avoidance
 
@@ -231,7 +231,7 @@ for (const perceived of perception.vision) {
 }
 ```
 
-**For every obstacle, we've got to determine:**
+**For every obstacle, we have got to determine:**
 
 * wether it's at a safe distance or not
 * if it's dangerousely close, what's the best steering to apply to avoid it
@@ -262,12 +262,12 @@ Upon modification, your agent has to be rebuilt and the trainer restarted for th
 
 Have a look at the [Getting Started guide for instructions on how to build your agent](/guides/getting-started/#building-the-agent).
 
-Here's what it should look like:
+Here is what it should look like:
 
 {{<youtube-async N_9uFZ0RIvA>}}
 
 ## Next up
 
-Your agent should now be capable of navigating the Game World without smashing in every obstacle on its path. Of course, the algorithm at play here is pretty basic, and there's **a lot** of room for improvement.
+Your agent should now be capable of navigating the Game World without smashing in every obstacle on its path. Of course, the algorithm at play here is pretty basic, and there is **a lot** of room for improvement.
 
 [In the next and last guide of this Quickstart, we'll have a look on how to make your agent aim and shoot with its gun](/guides/aiming-shooting).

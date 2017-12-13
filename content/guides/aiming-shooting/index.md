@@ -62,15 +62,13 @@ $ cd path/to/powerful-jennet
 $ ba build
 ```
 
-For our agent to shoot at another agent, there need to be more than one agent on the map.
-
-We'll spawn our agent 4 times. To do so, we can simply add `--agent` 3 more times in the `ba train command`:
+This time we need another agent to shoot at. We will spawn our agent four times. To do so, we can simply add `--agent` three more times in the `ba train command`:
 
 ```bash
 $ ba train -agent powerful-jennet -agent powerful-jennet -agent powerful-jennet -agent powerful-jennet
 ```
 
-Here's what it should look like in your browser at <http://localhost:8080/arena/1>
+Here is what it should look like in your browser at <http://localhost:8080/arena/1>.
 
 {{<youtube-async Oeunh0hOkbM>}}
 

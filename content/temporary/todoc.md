@@ -45,12 +45,3 @@ Tags: ["todoc"]
     * Ticks per second
 
 * The viz => [/guides/visualization](/guides/visualization)
-
-* Deathmatch game mode => [/guides/deathmatch-game-mode](/guides/deathmatch-game-mode)
-    * The goal
-    * Frags
-    * Scoring
-    * Death and Respawn
-    * Shooting
-    * Moving
-    * Duration of a game

@@ -3,16 +3,6 @@ Title: Where to go from here
 Date: 2017-12-01
 ---
 
-In the [Basic Obstacle Avoidance](/guides/basic-obstacle-avoidance) guide, we implemented basic navigational capabilities in our agent.
+Conratulations! You've completed the Byte Arena Quickstart guide and you know how to build an agent, make it wander through the World, and make it a basic shooter.
 
-In this guide, we pursue the development of our agent, giving him aiming and shooting abilities.
-
-If you've not done it already, please complete the [Basic Obstacle Avoidance guide](/guides/basic-obstacle-avoidance) before going on with this one.
-
-## The final code
-
-Here's what our `src/index.js` will look like when we're finished with this guide.
-
-```js
-
-```
+Now's the time for a real challenge: implement your own algorithms and strategies to improve its capacities. Be ready to compete when the Byte Arena Online Platform will open!

@@ -50,7 +50,13 @@ As we have seen in the previous example, the scaffolding operation has already b
 
 ## Recommended way
 
-If you want to rebuild it though, you need to issue this command in the folder containing the source code of the agent:
+If you want to rebuild it though, you need to issue this command:
+
+```bash
+$ ba build /path/to/my/agent
+```
+
+You can also skip the path altogether in the command if you are in the root folder of your agent source code:
 
 ```bash
 $ ba build

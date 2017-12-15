@@ -10,20 +10,18 @@ While your agent can be coded in whatever programming language you like, this se
 # Prerequisites
 
 * You have installed the Byte Arena CLI `ba`. Refer to [Installing Byte Arena](/guides/installing-bytearena) for instructions on how to install it.
-
-* You have a running Docker daemon (please refer to [Docker's documentation](https://docs.docker.com/) to install it if not). To check if it's running, issue the command `docker ps` on the command line
-
-* You know your way with JavaScript and NodeJS
+* You have a running Docker daemon (please refer to [Docker's documentation](https://docs.docker.com/) to install it if not). To check if it's running, issue the command `docker ps` on the command line.
+* You know your way with JavaScript and NodeJS.
 
 # Overview
 
 We are about to:
 
 * Scaffold the source code of your agent to get you started quickly
-* Build the agent to make it usable in a Byte Arena game
+* Build your agent to make it usable in a Byte Arena game
 * Launch a game with your new agent and watch the live visualisation in your browser
 * Explore the source code of the agent and explain the different parts
-* Modify the source code of the agent to implement a basic obstacle avoidance
+* Modify the source code of the agent to implement a basic obstacle avoidance algorithm
 
 # Scaffolding the source code of an agent
 
@@ -41,14 +39,14 @@ Example:
 
 <script type="text/javascript" data-rows="40" src="https://asciinema.org/a/N2YzvXPTWoZI4rBvdpu8LkfI2.js" id="asciicast-N2YzvXPTWoZI4rBvdpu8LkfI2" async defer></script>
 
-In this example, a directory named `powerful-jennet` has been generated, and the code it contains built in a docker container under the same name.
+In this example, a directory named `powerful-jennet` has been generated, it contains the code and builds a Docker container with the same name.
 
 # Building the agent
 
 You need to build the source code of your agent to make it usable in Byte Arena.
-Building an agent means producing a runnable docker container with the agent code.
+Building an agent means producing a runnable Docker image with the agent code.
 
-As we've seen in the previous example, the scaffolding operation has already built the agent for us.
+As we have seen in the previous example, the scaffolding operation has already built the agent for us.
 
 ## Recommended way
 
@@ -58,8 +56,7 @@ If you want to rebuild it though, you need to issue this command:
 $ ba build /path/to/my/agent
 ```
 
-
-You can also skip the path altogether in the command if you're in the root folder of your agent source code:
+You can also skip the path altogether in the command if you are in the root folder of your agent source code:
 
 ```bash
 $ ba build
@@ -67,17 +64,17 @@ $ ba build
 
 ## Alternative way
 
-Alternatively, you can also use docker to build your agent:
+Alternatively, you can also use Docker to build your agent:
 
 ```bash
 $ docker build -t my-agent-name .
 ```
 
-This will ask docker to build a container with your code (the `.` folder) and tag it with the desired name.
+This will ask Docker to build a container with your code (the `.` folder) and tag it with the desired name.
 
-<strong>Note: `ba build` is the recommended way of building, as it does some more checks before building the agent</strong> (like checking for the presence of banned docker instructions) <strong>and might do some other things in the future</strong>.
+<strong>Note: `ba build` is the recommended way of building, as it does checks before building the agent</strong> (like checking for the presence of forbidden Docker instructions) <strong>and might do some other things in the future</strong>.
 
-See [agent-container.md](/guides/agent-container/#constraints-on-the-container) for a list of the contraints imposed on agent containers).</strong>
+See [agent-container.md](/guides/agent-container/#constraints-on-the-container) for the list of contraints imposed on agent containers.
 
 # Giving it a ride
 
@@ -91,19 +88,19 @@ $ ba train -agent powerful-jennet
 
 <script type="text/javascript" data-rows="40" src="https://asciinema.org/a/JwmtBpH9wP9xNqSegw9UC6dhm.js" id="asciicast-JwmtBpH9wP9xNqSegw9UC6dhm" async defer></script>
 
-A browser should open at http://localhost:8080/arena/1, displaying the Byte Arena visualization, where you'll find your agent.
+A browser should open at http://localhost:8080/arena/1, displaying the Byte Arena visualization, where you will see your agent.
 
 As you can see, our agent is still pretty basic, moving randomly and not trying to avoid any obstacles.
 
 {{<youtube-async 5FgDUXSVxuE>}}
 
-Once the game is running, the game log displays a stream of messages informing about the state of the game (lines prefixed by `[game]`), and showing the output of your agents on their stdout (lines prefixed by `[agent]`).
+Once the game is running, the server displays a stream of messages informing about the state of the game (lines prefixed by `[game]`), and showing the output of your agents on their stdout and stderr (lines prefixed by `[agent]`).
 
 You can stop the game by pressing `Ctrl+c` on the command line.
 
 # Exploring the source code
 
-Here's a listing of the source files for our agent:
+Here are the files in the source of our agent:
 
 ```bash
 $ ~/agents/powerful-jennet> find . -type f
@@ -117,7 +114,7 @@ The meat of our agent is found in the two files `src/index.js` and `Dockerfile`
 
 ## Dockerfile
 
-And here's the content of the `Dockerfile`:
+And here is the content of the `Dockerfile` used to build the container:
 
 ```Dockerfile
 FROM node:7
@@ -141,20 +138,20 @@ CMD [ "npm", "start" ]
 
 As you can see, it's a pretty basic Dockerfile, bundling and compiling the source inside the container.
 
-* These lines tell Docker to run our code inside a container featuring NodeJS 7, and sets to `error` the verbosity level for `npm`, the Node package manager
+* These lines tell Docker to run our code inside a container providing Node.js 7, and sets to `error` the verbosity level for `npm`, the Node package manager.
 
 ```Dockerfile
 FROM node:7
 ENV NPM_CONFIG_LOGLEVEL error
 ```
 
-* We tell Docker that the commands of the Dockerfile will be executed in this folder.
+* We tell Docker that the future commands of the Dockerfile will be executed from this folder (changing the current working directory basically).
 
 ```Dockerfile
 WORKDIR /usr/app
 ```
 
-* Our agent source code is copied inside the container, in `/usr/app`
+* Our agent source code is copied inside the container in `/usr/app`.
 
 ```Dockerfile
 COPY . /usr/app/
@@ -166,13 +163,13 @@ COPY . /usr/app/
 RUN npm install
 ```
 
-* We then "build" the agent code, using Babel to transpile our ES6 code to ES5 code runnable by NodeJS.
+* We then "build" the agent code, using Babel to transpile our ES2015+ code to code that can run on Node.js.
 
 ```Dockerfile
 RUN npm run build
 ```
 
-* We finally tell Docker what command to issue to run our code when the container launches.
+* We finally tell Docker what command to issue to run our code when the container is started.
 
 ```Dockerfile
 CMD [ "npm", "start" ]
@@ -180,7 +177,7 @@ CMD [ "npm", "start" ]
 
 ## src/index.js
 
-Here's now the content of `src/index.js` :
+Here is now the content of `src/index.js` :
 
 ```js
 import { vector, comm } from "bytearena-sdk";
@@ -263,7 +260,7 @@ This automatically connects our agent to the game server.
 
 Under the hood, it:
 
-* connects to a TCP socket open on the server
+* opens a persistent TCP socket to the game server
 * performs a handshake with the server
 * returns an object encapsulating the connected socket and implementing Node's `EventEmitter` interface
 
@@ -283,14 +280,14 @@ agent.on('perception', perception => {
 });
 ```
 
-The game server will stream our agent its relative perception of the World he's in.
+The game server will stream our agent its relative perception of the World it is in.
 
-Every fraction of second (the default frequency is 20 ticks per second, or 20 tps), we're going to receive a datastructure containing this perception.
+Every fraction of second (the default frequency is 20 ticks per second, or 20 tps), we are going to receive a datastructure containing this perception.
 
-For each tick, the game server expects us to answer with our moves (our actions) for the tick. We'll see how to do that below.
+For each tick, the game server expects us to answer with our moves (our actions) for the tick. We will see how to do that below.
 
 Note: In its current state, our simplistic agent just moves randomly without avoiding obstacles, so it makes no use of this perception data yet.
-It's OK for now, but later on [we'll have a look at the perception](/guides/basic-obstacle-avoidance) to react to our environment instead.
+It's OK for now, but later on [we will have a look at the perception](/guides/basic-obstacle-avoidance) to react to our environment instead.
 
 ### Taking actions
 
@@ -299,7 +296,7 @@ const actions = [/*... our actions for the tick ...*/]
 agent.do(actions);
 ```
 
-Your agent can take actions by calling `do`.
+Your agent can take actions by calling the `do` method.
 
 An action is the description of something that the agent wants to do in the game World during the current tick (move, shoot, ...).
 

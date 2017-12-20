@@ -39,7 +39,7 @@ Example:
 
 <script type="text/javascript" data-rows="40" src="https://asciinema.org/a/N2YzvXPTWoZI4rBvdpu8LkfI2.js" id="asciicast-N2YzvXPTWoZI4rBvdpu8LkfI2" async defer></script>
 
-In this example, a directory named `powerful-jennet` has been generated, it contains the code and builds a Docker container with the same name.
+In this example, a directory named `powerful-jennet` has been generated, it contains the code and builds a Docker container with the same id.
 
 # Building the agent
 
@@ -47,6 +47,8 @@ You need to build the source code of your agent to make it usable in Byte Arena.
 Building an agent means producing a runnable Docker image with the agent code.
 
 As we have seen in the previous example, the scaffolding operation has already built the agent for us.
+
+<strong>Note:</strong> if you want to modify the id (`powerful-jennet` here for example) of your agent, the steps are explained in the [agent-configuration guide](guides/agent-configuration/).
 
 ## Recommended way
 
@@ -62,25 +64,11 @@ You can also skip the path altogether in the command if you are in the root fold
 $ ba build
 ```
 
-## Alternative way
-
-Alternatively, you can also use Docker to build your agent:
-
-```bash
-$ docker build -t my-agent-name .
-```
-
-This will ask Docker to build a container with your code (the `.` folder) and tag it with the desired name.
-
-<strong>Note: `ba build` is the recommended way of building, as it does checks before building the agent</strong> (like checking for the presence of forbidden Docker instructions) <strong>and might do some other things in the future</strong>.
-
-See [agent-container.md](/guides/agent-container/#constraints-on-the-container) for the list of contraints imposed on agent containers.
-
 # Giving it a ride
 
 The agent you just built is already able to fly!
 
-Try it with this command (replace `powerful-jennet` with the name of your agent):
+Try it with this command (replace `powerful-jennet` with the id of your agent):
 
 ```bash
 $ ba train -agent powerful-jennet

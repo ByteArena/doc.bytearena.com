@@ -3,8 +3,6 @@ Title: Agent configuration
 Date: 2017-12-20
 ---
 
-## The metadata of your agent
-
 This is the configuration of the Nodejs sample agent:
 
 ```json
@@ -39,7 +37,7 @@ The display name of your agent is stored in the `name` key.
 
 ```json
 {
-  "name": "sampleagent-deathmatch-nodejs",
+  "name": "Sample deathmatch agent for Node.js",
   …
 }
 ```

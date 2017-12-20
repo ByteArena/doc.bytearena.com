@@ -7,24 +7,24 @@ Date: 2017-12-01
 
 Refer to [Installing / Upgrading Byte Arena](/guides/installing-bytearena) for instructions.
 
-## Commands
+## Map
 
-### `ba map update`
+### Update the local maps
 
-TODOC
+The command is: `ba map update`.
 
-### `ba map list`
+### List your local maps
 
-TODOC
+The command is: `ba map list`.
 
-### `ba train`
+## Training
 
-TODOC
+Please refer to the [Agent Training](/guides/agent-training).
 
-### `ba generate`
+## Building
 
-TODOC
+Please refer to the [Building the agent](/guides/getting-started/#building-the-agent).
 
-### `ba build`
+## Scaffolding
 
-TODOC
+Please refer to the [Building the agent](/guides/getting-started/#scaffolding-the-source-code-of-an-agent).

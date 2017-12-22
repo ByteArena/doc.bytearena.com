@@ -3,15 +3,13 @@ Title: Byte Arena
 ---
 # What is Byte Arena?
 
-Byte Arena is a gaming platform where you don't play, but let a virtual robot (we call it an agent) play for you.
-
-Your task is to code the brain of the agent; we provide the bot, you provide the brain.
+Byte Arena is a gaming platform for developers where you have to code the brain of an agent.
 
 ## What's an agent?
 
-An agent is a piece of code that you write, that runs in a Docker container, and is able to communicate with the Byte Arena gaming platform using a simple and well defined API.
+An agent is a piece of code that is able to communicate with Byte Arena using a simple and well defined API.
 
-An agent perceives its digital environment, makes decisions, and takes actions to reach its objectives. Tweak it, evolve it, refine it, script it, make it learn — whatever works; one goal : overcome the opponents with your code.
+An agent perceives its environment, makes decisions, and takes actions to reach its objectives.
 
 ## How is this even a game?
 
@@ -19,7 +17,7 @@ We find it both stimulating and fun to make things and learn new stuff in the pr
 
 ## What does it look like?
 
-Once your agent is coded, you can watch it play against other players agents in your browser, evolving in a 3D world.
+Once your agent is coded, you can watch it play against other players agents in your browser.
 
 Here's how it looks like.
 

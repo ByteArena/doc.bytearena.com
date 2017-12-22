@@ -7,7 +7,7 @@ Byte Arena is a gaming platform for developers where you have to code the brain 
 
 ## What's an agent?
 
-An agent is a piece of code that is able to communicate with Byte Arena using a simple and well defined API.
+An agent is a piece of code that is able to communicate with Byte Arena using an API.
 
 An agent perceives its environment, makes decisions, and takes actions to reach its objectives.
 

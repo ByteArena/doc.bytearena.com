@@ -19,7 +19,7 @@ We find it both stimulating and fun to make things and learn new stuff in the pr
 
 Once your agent is coded, you can watch it play against other players agents in your browser.
 
-Here's how it looks like.
+Here's what it looks like:
 
 {{<youtube-async xpN1euK8-4g>}}
 

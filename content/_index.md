@@ -3,17 +3,13 @@ Title: Byte Arena
 ---
 # What is Byte Arena?
 
-Byte Arena is a gaming platform for developers.
-
-Your mission is to code the brain of an agent that we provide.
+Byte Arena is a gaming platform for developers where you have to code the brain of an agent.
 
 ## What's an agent?
 
-An agent is a piece of code that is able to communicate with the Byte Arena gaming platform using an API.
+An agent is a piece of code that is able to communicate with Byte Arena using an API.
 
 An agent perceives its environment, makes decisions, and takes actions to reach its objectives.
-
-In a sense, it is your avatar in the digital arenas of Byte Arena.
 
 ## How is this even a game?
 

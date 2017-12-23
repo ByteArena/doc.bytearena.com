@@ -29,4 +29,4 @@ When you hit an agent with one of your projectiles, the agent takes damage. When
 
 When fragged, an agent has to wait for a certain amount of time to be respawned. During that time, it can be seen by the other agents, but cannot move nor be damaged.
 
-When the time's up, ir reappears somewhere random on the map.
+When the time's up, it reappears somewhere random on the map.

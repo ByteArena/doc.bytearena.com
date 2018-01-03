@@ -7,11 +7,11 @@ In its current state, Byte Arena features a traditional Deathmatch Game Mode.
 
 In the future, more Game Modes will be supported, including Team Deathmatch, Capture The Flag and Speed Race.
 
-# The Deathmatch
+# Deathmatch
 
 ## The Goal
 
-The goal of your agent is to be ranked #1 among the competitors of a game, based on it's score.
+The goal of your agent is to be ranked #1 among the competitors of a game, based on its score.
 
 ## The Scoring
 
@@ -23,10 +23,10 @@ Each game has a duration of 5 minutes.
 
 ## Fragging and being fragged
 
-When you hit an agent with one of your projectiles, the agent takes damage. When an agent damage level reaches it's maximum, the agent is fragged and has to wait for it's respawn somewhere on the map.
+When you hit an agent with one of your projectiles, the agent takes damage. When an agent damage level reaches its maximum, the agent is fragged and has to wait for its respawn somewhere on the map.
 
 ## Respawning
 
-When fragged, an agent has to wait for certain amount of time to be respawned. During that time, he can be seen by the other agents, but he cannot move nor be damaged.
+When fragged, an agent has to wait for a certain amount of time to be respawned. During that time, it can be seen by the other agents, but cannot move nor be damaged.
 
-When the time's up, he reappears somewhere random on the map.
+When the time's up, it reappears somewhere random on the map.

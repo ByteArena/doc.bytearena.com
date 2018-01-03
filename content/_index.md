@@ -42,7 +42,7 @@ During beta, the online platform will not be available; [however, you can still 
 * Articles
     * [Movement physics with vectors](https://www.xtuc.fr/notes/movement-physics-w-vectors.html)
 * SDKs
-    * Go: [johnsudaar/go-bytearena](https://github.com/johnsudaar/go-bytearena)
+    * Go: [ByteArena/go-bytearena](https://github.com/ByteArena/go-bytearena)
 
 # Further reading / watching
 

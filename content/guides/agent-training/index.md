@@ -28,3 +28,13 @@ Over 60 tps the visualization might not be as fluid anymore. The alternative is 
 ### Use the file recorder
 
 Currently in development.
+
+## Automatically rebuild and restart
+
+You can run the following command to start the watcher:
+
+```sh
+ba train --watch path/to/your/agent
+```
+
+That will automatically rebuild and restart your agent when a change is detected.

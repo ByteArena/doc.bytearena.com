@@ -48,9 +48,7 @@ Building an agent means producing a runnable Docker image with the agent code.
 
 As we have seen in the previous example, the scaffolding operation has already built the agent for us.
 
-<strong>Note:</strong> if you want to modify the id (`powerful-jennet` here for example) of your agent, the steps are explained in the [agent-configuration guide](guides/agent-configuration/).
-
-## Recommended way
+<strong>Note:</strong> if you want to modify the id (`powerful-jennet` here for example) of your agent, the steps are explained in the [agent-configuration guide](/guides/agent-configuration/).
 
 If you want to rebuild it though, you need to issue this command:
 
@@ -343,3 +341,13 @@ const steering = new Vector2(-0.5, 0);
 This concludes the Byte Arena "Getting Started" guide.
 
 From there you can proceed to the ["Basic obstacle avoidance" guide](/guides/basic-obstacle-avoidance) to learn how to make your way around obstacles in the world.
+
+## Automatically rebuild and restart
+
+You can run the following command to start the watcher:
+
+```sh
+ba train --watch path/to/your/agent
+```
+
+That will automatically rebuild and restart your agent when a change is detected.

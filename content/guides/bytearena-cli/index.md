@@ -27,4 +27,4 @@ Please refer to the [Building the agent](/guides/getting-started/#building-the-a
 
 ## Scaffolding
 
-Please refer to the [Building the agent](/guides/getting-started/#scaffolding-the-source-code-of-an-agent).
+Please refer to the [Scaffolding the source code of an agent](/guides/getting-started/#scaffolding-the-source-code-of-an-agent).

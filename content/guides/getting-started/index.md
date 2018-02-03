@@ -62,6 +62,8 @@ You can also skip the path altogether in the command if you are in the root fold
 $ ba build
 ```
 
+<strong>Note:</strong> you can also pass `--watch` to the previous command to automatically rebuild when a file changed.
+
 # Giving it a ride
 
 The agent you just built is already able to fly!

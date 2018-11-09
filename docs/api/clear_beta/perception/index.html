@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Byte Arena Docs </title>
+ 
+<link rel="stylesheet" href="/css/style.css" media="screen">
+</head>
+
+<body>
+    <div id="leftbar" class="column">
+        <div class="top-left"></div>
+        <div class="bottom bottom-left"> <ul class="menu">
+    <strong>Basics</strong>
+    <li><a href="/">What is Byte Arena?</a></li>
+    <li><a href="/beta-user">Letter to beta users</a></li>
+
+    <strong>Quickstart</strong>
+    <li><a href="/guides/installing-bytearena"><span>00 • </span>Installing Byte Arena</a></li>
+    <li><a href="/guides/getting-started"><span>01 • </span>Getting Started</a></li>
+    <li><a href="/guides/basic-obstacle-avoidance"><span>02 • </span>Basic Obstacle Avoidance</a></li>
+    <li><a href="/guides/aiming-shooting"><span>03 • </span>Aiming and shooting</a></li>
+    <li><a href="/guides/quickstart-next-steps"><span>04 • </span>Where to go from here</a></li>
+
+    <strong>Guides</strong>
+    <li class="coming-soon"><a href="/guides/the-agent"><span>00 • </span>The Agent</a></li>
+    <li class="coming-soon"><a href="/guides/game-world"><span>01 • </span>The Game World</a></li>
+    <li><a href="/guides/agent-configuration"><span>02 • </span>Agent Configuration</a></li>
+    <li><a href="/guides/agent-container"><span>03 • </span>Agent Container</a></li>
+    <li><a href="/guides/bytearena-cli"><span>04 • </span>Byte Arena CLI</a></li>
+    <li><a href="/guides/agent-training"><span>05 • </span>Agent Training</a></li>
+    <li><a href="/guides/deathmatch-game-mode"><span>06 • </span>Deathmatch Game</a></li>
+    <li><a href="/guides/game-events"><span>07 • </span>Game events</a></li>
+    <li class="coming-soon"><a href="/guides/visualization"><span>08 • </span>The Visualization</a></li>
+    <li><a href="/guides/contributing"><span>09 • </span>Contributing</a></li>
+
+    <strong>Online Platform</strong>
+    <li class="coming-soon"><a href="/guides/online-platform">The Online Platform</a></li>
+    <li class="coming-soon"><a href="/guides/competition">Competition</a></li>
+
+    <strong>API docs</strong>
+    <li><a href="/api/clear_beta"><code>clear_beta</code> version</a></li>
+
+    <strong>Releases</strong>
+    <li><a href="/changelog">All the releases</a></li>
+</ul>
+ </div>
+    </div>
+    <div id="rightpanel" class="column">
+        <div class="top-right">
+            <div class="inner">
+                 <header>
+    <a href="/" class="hide-when-burger-open">
+        <img src="/img/angrybot.svg" width="42" height="40" style="float: left;margin-right: 10px;" /> Byte Arena Docs
+    </a>
+    <div id="burger">
+        <img src="/img/burger.svg" width="26" height="26" />
+    </div>
+</header> 
+            </div>
+        </div>
+        <div class="bottom bottom-right">
+            <div class="inner">
+                
+<main>
+    <article>
+        <h1>Perception specification</h1>
+        <div>
+            
+
+<h2 id="perception-structure">Perception structure</h2>
+
+<p>The root object is called <code>perception</code>, it&rsquo;s the object you receive in argument in the <code>onTick</code> function.</p>
+
+<h3 id="perception"><code>Perception</code></h3>
+
+<table>
+<thead>
+<tr>
+<th>Property name</th>
+<th align="left">Type</th>
+<th align="left">Representation in the JSON</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>score</td>
+<td align="left"><code>int</code></td>
+<td align="left"><code>Number</code></td>
+</tr>
+
+<tr>
+<td>energy</td>
+<td align="left"><code>float64</code></td>
+<td align="left"><code>Number</code></td>
+</tr>
+
+<tr>
+<td>velocity</td>
+<td align="left"><code>Vector2</code></td>
+<td align="left"><code>Array of float64 (x, y)</code></td>
+</tr>
+
+<tr>
+<td>azimuth</td>
+<td align="left"><code>float64</code></td>
+<td align="left"><code>Number</code></td>
+</tr>
+
+<tr>
+<td>vision</td>
+<td align="left"><code>array of VisionItem</code></td>
+<td align="left"><code>Array of Object</code></td>
+</tr>
+
+<tr>
+<td>shootenergy</td>
+<td align="left"><code>float64</code></td>
+<td align="left"><code>Number</code></td>
+</tr>
+
+<tr>
+<td>shootcooldown</td>
+<td align="left"><code>int</code></td>
+<td align="left"><code>Number</code></td>
+</tr>
+
+<tr>
+<td>messages</td>
+<td align="left"><code>array of MessageWrapper</code></td>
+<td align="left"><code>Array of Object</code></td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="visionitem"><code>VisionItem</code></h3>
+
+<table>
+<thead>
+<tr>
+<th>Property name</th>
+<th align="left">Type</th>
+<th align="left">Representation in the JSON</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>tag</td>
+<td align="left"><code>string</code></td>
+<td align="left"><code>String</code></td>
+</tr>
+
+<tr>
+<td>nearedge</td>
+<td align="left"><code>Vector2</code></td>
+<td align="left"><code>Array of float64 (x, y)</code></td>
+</tr>
+
+<tr>
+<td>center</td>
+<td align="left"><code>Vector2</code></td>
+<td align="left"><code>Array of float64 (x, y)</code></td>
+</tr>
+
+<tr>
+<td>faredge</td>
+<td align="left"><code>Vector2</code></td>
+<td align="left"><code>Array of float64 (x, y)</code></td>
+</tr>
+
+<tr>
+<td>velocity</td>
+<td align="left"><code>Vector2</code></td>
+<td align="left"><code>Array of float64 (x, y)</code></td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="messagewrapper"><code>MessageWrapper</code></h3>
+
+<table>
+<thead>
+<tr>
+<th>Property name</th>
+<th align="left">Type</th>
+<th align="left">Representation in the JSON</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>subject</td>
+<td align="left"><code>string</code></td>
+<td align="left"><code>String</code></td>
+</tr>
+
+<tr>
+<td>body</td>
+<td align="left"><code>unknown</code></td>
+<td align="left"><code>Object</code></td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="score"><code>Score</code></h3>
+
+<table>
+<thead>
+<tr>
+<th>Property name</th>
+<th align="left">Type</th>
+<th align="left">Representation in the JSON</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>value</td>
+<td align="left"><code>int</code></td>
+<td align="left"><code>Number</code></td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="stats"><code>Stats</code></h3>
+
+<table>
+<thead>
+<tr>
+<th>Property name</th>
+<th align="left">Type</th>
+<th align="left">Representation in the JSON</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>distanceTravelled</td>
+<td align="left"><code>float64</code></td>
+<td align="left"><code>Number</code></td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="youarerespawning"><code>YouAreRespawning</code></h3>
+
+<table>
+<thead>
+<tr>
+<th>Property name</th>
+<th align="left">Type</th>
+<th align="left">Representation in the JSON</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>respawningin</td>
+<td align="left"><code>int</code></td>
+<td align="left"><code>Number</code></td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="youhavebeenfragged"><code>YouHaveBeenFragged</code></h3>
+
+<table>
+<thead>
+<tr>
+<th>Property name</th>
+<th align="left">Type</th>
+<th align="left">Representation in the JSON</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>by</td>
+<td align="left"><code>string</code></td>
+<td align="left"><code>String</code></td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="youhavebeenhit"><code>YouHaveBeenHit</code></h3>
+
+<table>
+<thead>
+<tr>
+<th>Property name</th>
+<th align="left">Type</th>
+<th align="left">Representation in the JSON</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>kind</td>
+<td align="left"><code>string</code></td>
+<td align="left"><code>String</code></td>
+</tr>
+
+<tr>
+<td>comingfrom</td>
+<td align="left"><code>float64</code></td>
+<td align="left"><code>Number</code></td>
+</tr>
+
+<tr>
+<td>damage</td>
+<td align="left"><code>float64</code></td>
+<td align="left"><code>Number</code></td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="youhavefragged"><code>YouHaveFragged</code></h3>
+
+<table>
+<thead>
+<tr>
+<th>Property name</th>
+<th align="left">Type</th>
+<th align="left">Representation in the JSON</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>who</td>
+<td align="left"><code>string</code></td>
+<td align="left"><code>String</code></td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="youhavehit"><code>YouHaveHit</code></h3>
+
+<table>
+<thead>
+<tr>
+<th>Property name</th>
+<th align="left">Type</th>
+<th align="left">Representation in the JSON</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Who</td>
+<td align="left"><code>string</code></td>
+<td align="left"><code>String</code></td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="youhaverespawned"><code>YouHaveRespawned</code></h3>
+
+        </div>
+    </article>
+</main>
+
+            </div>
+        </div>
+        <div class="footer-right">
+            <div class="inner">
+                <div class="left pull-left">
+                    <a href="https://get.bytearena.com">Get Byte Arena</a>
+                </div>
+                <div class="right pull-right">
+                    Edit this page on GitHub:
+                    <a href="https://github.com/ByteArena/doc.bytearena.com/blob/master/content/api/clear_beta/perception.md" style="color: white;"> api/clear_beta/perception.md</a>.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/menuactive.js" defer async></script>
+    <script src="/js/headinglinks.js" defer async></script>
+    <script src="/js/burger.js" defer async></script>
+    <script src="/js/youtube-async.js" defer async></script>
+</body>
+
+</html>

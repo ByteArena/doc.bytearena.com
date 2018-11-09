@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Byte Arena Docs </title>
+ 
+<link rel="stylesheet" href="/css/style.css" media="screen">
+</head>
+
+<body>
+    <div id="leftbar" class="column">
+        <div class="top-left"></div>
+        <div class="bottom bottom-left"> <ul class="menu">
+    <strong>Basics</strong>
+    <li><a href="/">What is Byte Arena?</a></li>
+    <li><a href="/beta-user">Letter to beta users</a></li>
+
+    <strong>Quickstart</strong>
+    <li><a href="/guides/installing-bytearena"><span>00 • </span>Installing Byte Arena</a></li>
+    <li><a href="/guides/getting-started"><span>01 • </span>Getting Started</a></li>
+    <li><a href="/guides/basic-obstacle-avoidance"><span>02 • </span>Basic Obstacle Avoidance</a></li>
+    <li><a href="/guides/aiming-shooting"><span>03 • </span>Aiming and shooting</a></li>
+    <li><a href="/guides/quickstart-next-steps"><span>04 • </span>Where to go from here</a></li>
+
+    <strong>Guides</strong>
+    <li class="coming-soon"><a href="/guides/the-agent"><span>00 • </span>The Agent</a></li>
+    <li class="coming-soon"><a href="/guides/game-world"><span>01 • </span>The Game World</a></li>
+    <li><a href="/guides/agent-configuration"><span>02 • </span>Agent Configuration</a></li>
+    <li><a href="/guides/agent-container"><span>03 • </span>Agent Container</a></li>
+    <li><a href="/guides/bytearena-cli"><span>04 • </span>Byte Arena CLI</a></li>
+    <li><a href="/guides/agent-training"><span>05 • </span>Agent Training</a></li>
+    <li><a href="/guides/deathmatch-game-mode"><span>06 • </span>Deathmatch Game</a></li>
+    <li><a href="/guides/game-events"><span>07 • </span>Game events</a></li>
+    <li class="coming-soon"><a href="/guides/visualization"><span>08 • </span>The Visualization</a></li>
+    <li><a href="/guides/contributing"><span>09 • </span>Contributing</a></li>
+
+    <strong>Online Platform</strong>
+    <li class="coming-soon"><a href="/guides/online-platform">The Online Platform</a></li>
+    <li class="coming-soon"><a href="/guides/competition">Competition</a></li>
+
+    <strong>API docs</strong>
+    <li><a href="/api/clear_beta"><code>clear_beta</code> version</a></li>
+
+    <strong>Releases</strong>
+    <li><a href="/changelog">All the releases</a></li>
+</ul>
+ </div>
+    </div>
+    <div id="rightpanel" class="column">
+        <div class="top-right">
+            <div class="inner">
+                 <header>
+    <a href="/" class="hide-when-burger-open">
+        <img src="/img/angrybot.svg" width="42" height="40" style="float: left;margin-right: 10px;" /> Byte Arena Docs
+    </a>
+    <div id="burger">
+        <img src="/img/burger.svg" width="26" height="26" />
+    </div>
+</header> 
+            </div>
+        </div>
+        <div class="bottom bottom-right">
+            <div class="inner">
+                
+<main>
+    <article>
+        <h1>Basic obstacle avoidance</h1>
+        <div>
+            
+
+<p>In the <a href="/guides/getting-started">Getting Started with Byte Arena</a> guide, we had a look on how to scaffold a pretty basic agent that blindly strolls through the Game World.</p>
+
+<p><strong>In this guide, we pursue the development of our agent, adding basic obstacle avoidance capabilities.</strong></p>
+
+<p>If you&rsquo;ve not done it already, please complete the <a href="/guides/getting-started">Getting Started guide</a> before going on with this one.</p>
+
+<h2 id="the-final-code">The final code</h2>
+
+<p>Here&rsquo;s what our <code>src/index.js</code> will look like when we are finished with this guide.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// import SDK and vector facilities to ease development
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">vector</span>, <span style="color:#a6e22e">comm</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;bytearena-sdk&#34;</span>;
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">Vector2</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">vector</span>.<span style="color:#a6e22e">Vector2</span>;
+
+<span style="color:#75715e">// Connecting our agent
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">agent</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">comm</span>.<span style="color:#a6e22e">connect</span>();
+
+<span style="color:#75715e">// Watching perception stream
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">agent</span>.<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#34;perception&#34;</span>, <span style="color:#a6e22e">perception</span> =&gt; {
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">actions</span> <span style="color:#f92672">=</span> [];
+
+  <span style="color:#75715e">// Get a steering vector based on perception
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">steering</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">navigate</span>(<span style="color:#a6e22e">perception</span>);
+
+  <span style="color:#75715e">// Submitting our actions for this turn
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">actions</span>.<span style="color:#a6e22e">push</span>({ <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;steer&#34;</span>, <span style="color:#a6e22e">arguments</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">steering</span>.<span style="color:#a6e22e">toArray</span>() });
+  <span style="color:#a6e22e">agent</span>.<span style="color:#66d9ef">do</span>(<span style="color:#a6e22e">actions</span>);
+});
+
+<span style="color:#75715e">// Returns a steering vector exploring the world,
+</span><span style="color:#75715e">// or dodging an obstacle if there&#39;s any
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">navigate</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">perception</span> =&gt; {
+
+  <span style="color:#75715e">// Obtain a vector steering away from obstacles
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">// if there&#39;s any on our path, or null if not
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">// This func is defined below
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">steering</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">avoidObstables</span>(<span style="color:#a6e22e">perception</span>);
+
+  <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span><span style="color:#a6e22e">steering</span>) {
+    <span style="color:#75715e">// no obstacle has to be avoided
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// we can just stroll around randomly
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">direction</span> <span style="color:#f92672">=</span> Math.<span style="color:#a6e22e">random</span>() <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0.5</span> <span style="color:#f92672">?</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> <span style="color:#ae81ff">1</span>; <span style="color:#75715e">// -1: left, 1: right
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">x</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">direction</span> <span style="color:#f92672">*</span> Math.<span style="color:#a6e22e">random</span>();
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">y</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>; <span style="color:#75715e">// move forward 3 meters
+</span><span style="color:#75715e"></span>
+    <span style="color:#a6e22e">steering</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector2</span>(<span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">y</span>);
+  }
+
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">steering</span>;
+};
+
+<span style="color:#75715e">// Returns a vector steering away from
+</span><span style="color:#75715e">// an obstacle if there&#39;s any in front of us
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">avoidObstables</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">perception</span> =&gt; {
+
+  <span style="color:#75715e">// this is the resulting vector (null if no vector)
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">steering</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+
+  <span style="color:#75715e">// this remembers the distance to the obstacle we&#39;re currently
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">// steering away in the algorithm below
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">curdistance</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+
+  <span style="color:#75715e">// for everything that stands in our field of view
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">perceived</span> <span style="color:#66d9ef">of</span> <span style="color:#a6e22e">perception</span>.<span style="color:#a6e22e">vision</span>) {
+
+    <span style="color:#75715e">// build a vector to the closest point of the obstacle
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">point</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Vector2</span>.<span style="color:#a6e22e">fromArray</span>(<span style="color:#a6e22e">perceived</span>.<span style="color:#a6e22e">nearedge</span>);
+
+    <span style="color:#75715e">// determine the angle of this point relative to us
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// angle increases clockwise, and 0 is at 12:00 on the clock
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// so 0° =&gt; straight ahead, 90° =&gt; 90° to our right, 270° =&gt; 90° to our left
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">angle</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">point</span>.<span style="color:#a6e22e">angle</span>();  <span style="color:#75715e">// in radians
+</span><span style="color:#75715e"></span>    
+    <span style="color:#75715e">// The magnitude of a vector is its length
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// This is the distance between us and the obstacle
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">distance</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">point</span>.<span style="color:#a6e22e">mag</span>(); <span style="color:#75715e">// in meters
+</span><span style="color:#75715e"></span>
+    <span style="color:#75715e">// If obstacle is 15m away or less, and our current steering
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// is not yet avoiding any closer obstacle,
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// we steer away from this one
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">distance</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">15</span> <span style="color:#f92672">&amp;&amp;</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">curdistance</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">curdistance</span> <span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">distance</span>)) {
+
+      <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">angle</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">degreesToRadians</span>(<span style="color:#ae81ff">180</span>)) {
+        <span style="color:#75715e">// obstacle is on our right, moving left
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">steering</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector2</span>(<span style="color:#f92672">-</span><span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">0</span>);
+
+      } <span style="color:#66d9ef">else</span> {
+        <span style="color:#75715e">// obstacle is on our left, moving right
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">steering</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector2</span>(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">0</span>);
+      }
+
+      <span style="color:#75715e">// updating distance to obstacle currently steered away
+</span><span style="color:#75715e"></span>      <span style="color:#a6e22e">curdistance</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">distance</span>;
+    }
+  }
+
+  <span style="color:#75715e">// Done ! returning either a vector, or null
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">steering</span>;
+}
+
+<span style="color:#75715e">// In Byte Arena, angles are expressed in radians
+</span><span style="color:#75715e">// This converts from radians to degrees
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">degreesToRadians</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">deg</span> =&gt; <span style="color:#a6e22e">deg</span> <span style="color:#f92672">*</span> (<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> Math.<span style="color:#a6e22e">PI</span>) <span style="color:#960050;background-color:#1e0010">/ 360.0;</span></code></pre></div>
+<p>You can also find this code on GitHub in the <code>basic-obstacle-avoidance</code> branch of our <code>sample-nodejs-agent</code> repo here: <a href="https://github.com/ByteArena/sample-nodejs-agent/blob/basic-obstacle-avoidance/src/index.js">https://github.com/ByteArena/sample-nodejs-agent/blob/basic-obstacle-avoidance/src/index.js</a></p>
+
+<h2 id="implementation-step-by-step">Implementation step by step</h2>
+
+<p>Let&rsquo;s break down this code and explain what it does bit by bit:</p>
+
+<h3 id="main-structure-of-the-agent">Main structure of the agent</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// import SDK and vector facilities to ease development
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">vector</span>, <span style="color:#a6e22e">comm</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;bytearena-sdk&#34;</span>;
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">Vector2</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">vector</span>.<span style="color:#a6e22e">Vector2</span>;
+
+<span style="color:#75715e">// Connecting our agent
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">agent</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">comm</span>.<span style="color:#a6e22e">connect</span>();
+
+<span style="color:#75715e">// Watching perception stream
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">agent</span>.<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#34;perception&#34;</span>, <span style="color:#a6e22e">perception</span> =&gt; {
+  <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">// Get a steering vector based on perception
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">steering</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">navigate</span>(<span style="color:#a6e22e">perception</span>);
+  <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span>});</code></pre></div>
+<p>This is the main structure of our agent code, and has been previously explained in the <a href="/guides/getting-started">Getting Started</a> guide.</p>
+
+<p>The only difference is that we moved the navigation code in the <code>navigate</code> function; calling it gives us a steering vector.</p>
+
+<h3 id="dodging-an-obstacle-or-strolling-around">Dodging an obstacle or strolling around?</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// Returns a steering vector exploring the world,
+</span><span style="color:#75715e">// or dodging an obstacle if there&#39;s any
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">navigate</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">perception</span> =&gt; {
+
+  <span style="color:#75715e">// Obtain a vector steering away from obstacles
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">// if there&#39;s any on our path, or null if not
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">steering</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">avoidObstables</span>(<span style="color:#a6e22e">perception</span>);
+
+  <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span><span style="color:#a6e22e">steering</span>) {
+    <span style="color:#75715e">// no obstacle has to be avoided
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// we can just stroll around randomly
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// [...]
+</span><span style="color:#75715e"></span>  }
+
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">steering</span>;
+};</code></pre></div>
+<p>We have only one move per tick, so <strong>we have to decide wether to dodge an obstacle or explore the map on each tick.</strong></p>
+
+<p>In our basic implementation, we always give the priority to dodging obstacles. So if the obstacle avoidance algorithm feeds us a vector steering away from an obstacle, we use it unconditionally, otherwise it&rsquo;s just business as usual.</p>
+
+<h3 id="the-obstacle-avoidance-function">The obstacle avoidance function</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// Returns a vector steering away from
+</span><span style="color:#75715e">// an obstacle if there&#39;s any in front of us
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">avoidObstables</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">perception</span> =&gt; {
+
+  <span style="color:#75715e">// this is the resulting vector (null if no vector)
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">steering</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+
+  <span style="color:#75715e">// this remembers the distance to the obstacle we&#39;re currently
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">// steering away in the algorithm below
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">curdistance</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+
+  <span style="color:#75715e">// for everything that stands in our field of view
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">perceived</span> <span style="color:#66d9ef">of</span> <span style="color:#a6e22e">perception</span>.<span style="color:#a6e22e">vision</span>) {
+    <span style="color:#75715e">// [...] Algorithm detailed below
+</span><span style="color:#75715e"></span>  }
+
+  <span style="color:#75715e">// Done ! returning either a vector, or null
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">steering</span>;
+}</code></pre></div>
+<p>The job of this function is to give us a vector steering away from obstacles we might hit soon, or <code>null</code> if there isn&rsquo;t any.</p>
+
+<p>It&rsquo;s basicaly a loop iterating over every obstacle we have in our field of view, and determining the best action to take regarding this obstacle.</p>
+
+<h4 id="algorithm-for-our-basic-obstacle-avoidance">Algorithm for our basic obstacle avoidance</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// [...]
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">perceived</span> <span style="color:#66d9ef">of</span> <span style="color:#a6e22e">perception</span>.<span style="color:#a6e22e">vision</span>) {
+
+  <span style="color:#75715e">// build a vector to the closest point of the obstacle
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">point</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Vector2</span>.<span style="color:#a6e22e">fromArray</span>(<span style="color:#a6e22e">perceived</span>.<span style="color:#a6e22e">nearedge</span>);
+
+  <span style="color:#75715e">// determine the angle of this point relative to us
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">// angle increases clockwise, and 0 is at 12:00 on the clock
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">// so 0° =&gt; straight ahead, 90° =&gt; 90° to our right, 270° =&gt; 90° to our left
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">angle</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">point</span>.<span style="color:#a6e22e">angle</span>();  <span style="color:#75715e">// in radians
+</span><span style="color:#75715e"></span>
+  <span style="color:#75715e">// The magnitude of a vector is its length
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">// This is the distance between us and the obstacle
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">distance</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">point</span>.<span style="color:#a6e22e">mag</span>(); <span style="color:#75715e">// in meters
+</span><span style="color:#75715e"></span>
+  <span style="color:#75715e">// If obstacle is 15m away or less, and our current steering
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">// is not yet avoiding any closer obstacle,
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">// we steer away from this one
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">distance</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">15</span> <span style="color:#f92672">&amp;&amp;</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">curdistance</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">curdistance</span> <span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">distance</span>)) {
+
+    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">angle</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">degreesToRadians</span>(<span style="color:#ae81ff">180</span>)) {
+      <span style="color:#75715e">// obstacle is on our right, moving left
+</span><span style="color:#75715e"></span>      <span style="color:#a6e22e">steering</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector2</span>(<span style="color:#f92672">-</span><span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">0</span>);
+
+    } <span style="color:#66d9ef">else</span> {
+      <span style="color:#75715e">// obstacle is on our left, moving right
+</span><span style="color:#75715e"></span>      <span style="color:#a6e22e">steering</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector2</span>(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">0</span>);
+    }
+
+    <span style="color:#75715e">// updating distance to obstacle currently steered away
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">curdistance</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">distance</span>;
+  }
+}</code></pre></div>
+<p><strong>For every obstacle, we have got to determine:</strong></p>
+
+<ul>
+<li>wether it&rsquo;s at a safe distance or not</li>
+<li>if it&rsquo;s dangerousely close, what&rsquo;s the best steering to apply to avoid it</li>
+</ul>
+
+<p><strong>To do so:</strong></p>
+
+<ul>
+<li><p>we get the closest point of the obstacle</p></li>
+
+<li><p><strong>we determine if this point is closer than 15m</strong> (our abitrary safe distance)</p>
+
+<ul>
+<li><p>if it&rsquo;s not, we ignore the obstacle and move on to the next</p></li>
+
+<li><p><strong>if it is dangerousely close</strong>:</p>
+
+<ul>
+<li><p>we determine if this obstacle is closer than the obstacle we&rsquo;re currently steering away from (if any)</p>
+
+<ul>
+<li><p>if it&rsquo;s not, we ignore the obstacle and move on to the next</p></li>
+
+<li><p><strong>if it is closer than the previous obstacle</strong>, we have to steer away from it:</p>
+
+<ul>
+<li><p><strong>we determine wheter to turn left of right</strong> to avoid the obstacle based on the position of the obstacle relative to us (based on the angle between us and the onstacle)</p></li>
+
+<li><p>we forge a steering vector, and keep to return it in the end</p></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+
+<h2 id="rebuilding-the-agent-and-visualizing-the-result">Rebuilding the agent and visualizing the result</h2>
+
+<p>Upon modification, your agent has to be rebuilt and the trainer restarted for the new code to be run.</p>
+
+<p>Have a look at the <a href="/guides/getting-started/#building-the-agent">Getting Started guide for instructions on how to build your agent</a>.</p>
+
+<p>Here is what it should look like:</p>
+
+<div class="video youtube-video">
+    <div src="//www.youtube.com/embed/N_9uFZ0RIvA"></div>
+</div>
+
+<h2 id="next-up">Next up</h2>
+
+<p>Your agent should now be capable of navigating the Game World without smashing in every obstacle on its path. Of course, the algorithm at play here is pretty basic, and there is <strong>a lot</strong> of room for improvement.</p>
+
+<p><a href="/guides/aiming-shooting">In the next and last guide of this Quickstart, we&rsquo;ll have a look on how to make your agent aim and shoot with its gun</a>.</p>
+
+        </div>
+    </article>
+</main>
+
+            </div>
+        </div>
+        <div class="footer-right">
+            <div class="inner">
+                <div class="left pull-left">
+                    <a href="https://get.bytearena.com">Get Byte Arena</a>
+                </div>
+                <div class="right pull-right">
+                    Edit this page on GitHub:
+                    <a href="https://github.com/ByteArena/doc.bytearena.com/blob/master/content/guides/basic-obstacle-avoidance/index.md" style="color: white;"> guides/basic-obstacle-avoidance/index.md</a>.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/menuactive.js" defer async></script>
+    <script src="/js/headinglinks.js" defer async></script>
+    <script src="/js/burger.js" defer async></script>
+    <script src="/js/youtube-async.js" defer async></script>
+</body>
+
+</html>

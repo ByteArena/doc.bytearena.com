@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Apis on Byte Arena Docs</title>
+    <link>http://example.org/api/</link>
+    <description>Recent content in Apis on Byte Arena Docs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 01 Dec 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://example.org/api/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Byte Arena API clear_beta release</title>
+      <link>http://example.org/api/clear_beta/</link>
+      <pubDate>Fri, 01 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/api/clear_beta/</guid>
+      <description>This is the Byte Arena API for the clear_beta release.
+ Handshake Perception  </description>
+    </item>
+    
+    <item>
+      <title>Handshake (clear_beta release)</title>
+      <link>http://example.org/api/clear_beta/handshake/</link>
+      <pubDate>Fri, 01 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/api/clear_beta/handshake/</guid>
+      <description> Handshake structure After the handshake some data will be send back to the agent, with the following properties:
+Specs    Property name Type Representation in the JSON     maxspeed float64 Number   maxsteeringforce float64 Number   maxangularvelocity float64 Number   visionradius float64 Number   visionangle Angle Number (radian)   bodyradius float64 Number   maxshootenergy float64 Number   shootrecoveryrate float64 Number   Gear GearSpecs Object    GearSpecs    Property name Type Representation in the JSON     Genre string string   Kind string string   Specs unknown Object    GunSpecs    Property name Type Representation in the JSON     shootcost float64 Number   shootcooldown int Number   projectilespeed float64 Number   projectiledamage float64 Number   projectilerange float64 Number    </description>
+    </item>
+    
+    <item>
+      <title>Perception specification</title>
+      <link>http://example.org/api/clear_beta/perception/</link>
+      <pubDate>Fri, 01 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/api/clear_beta/perception/</guid>
+      <description> Perception structure The root object is called perception, it&amp;rsquo;s the object you receive in argument in the onTick function.
+Perception    Property name Type Representation in the JSON     score int Number   energy float64 Number   velocity Vector2 Array of float64 (x, y)   azimuth float64 Number   vision array of VisionItem Array of Object   shootenergy float64 Number   shootcooldown int Number   messages array of MessageWrapper Array of Object    VisionItem    Property name Type Representation in the JSON     tag string String   nearedge Vector2 Array of float64 (x, y)   center Vector2 Array of float64 (x, y)   faredge Vector2 Array of float64 (x, y)   velocity Vector2 Array of float64 (x, y)    MessageWrapper    Property name Type Representation in the JSON     subject string String   body unknown Object    Score    Property name Type Representation in the JSON     value int Number    Stats    Property name Type Representation in the JSON     distanceTravelled float64 Number    YouAreRespawning    Property name Type Representation in the JSON     respawningin int Number    YouHaveBeenFragged    Property name Type Representation in the JSON     by string String    YouHaveBeenHit    Property name Type Representation in the JSON     kind string String   comingfrom float64 Number   damage float64 Number    YouHaveFragged    Property name Type Representation in the JSON     who string String    YouHaveHit    Property name Type Representation in the JSON     Who string String    YouHaveRespawned </description>
+    </item>
+    
+  </channel>
+</rss>

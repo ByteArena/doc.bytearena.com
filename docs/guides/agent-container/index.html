@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Byte Arena Docs </title>
+ 
+<link rel="stylesheet" href="/css/style.css" media="screen">
+</head>
+
+<body>
+    <div id="leftbar" class="column">
+        <div class="top-left"></div>
+        <div class="bottom bottom-left"> <ul class="menu">
+    <strong>Basics</strong>
+    <li><a href="/">What is Byte Arena?</a></li>
+    <li><a href="/beta-user">Letter to beta users</a></li>
+
+    <strong>Quickstart</strong>
+    <li><a href="/guides/installing-bytearena"><span>00 • </span>Installing Byte Arena</a></li>
+    <li><a href="/guides/getting-started"><span>01 • </span>Getting Started</a></li>
+    <li><a href="/guides/basic-obstacle-avoidance"><span>02 • </span>Basic Obstacle Avoidance</a></li>
+    <li><a href="/guides/aiming-shooting"><span>03 • </span>Aiming and shooting</a></li>
+    <li><a href="/guides/quickstart-next-steps"><span>04 • </span>Where to go from here</a></li>
+
+    <strong>Guides</strong>
+    <li class="coming-soon"><a href="/guides/the-agent"><span>00 • </span>The Agent</a></li>
+    <li class="coming-soon"><a href="/guides/game-world"><span>01 • </span>The Game World</a></li>
+    <li><a href="/guides/agent-configuration"><span>02 • </span>Agent Configuration</a></li>
+    <li><a href="/guides/agent-container"><span>03 • </span>Agent Container</a></li>
+    <li><a href="/guides/bytearena-cli"><span>04 • </span>Byte Arena CLI</a></li>
+    <li><a href="/guides/agent-training"><span>05 • </span>Agent Training</a></li>
+    <li><a href="/guides/deathmatch-game-mode"><span>06 • </span>Deathmatch Game</a></li>
+    <li><a href="/guides/game-events"><span>07 • </span>Game events</a></li>
+    <li class="coming-soon"><a href="/guides/visualization"><span>08 • </span>The Visualization</a></li>
+    <li><a href="/guides/contributing"><span>09 • </span>Contributing</a></li>
+
+    <strong>Online Platform</strong>
+    <li class="coming-soon"><a href="/guides/online-platform">The Online Platform</a></li>
+    <li class="coming-soon"><a href="/guides/competition">Competition</a></li>
+
+    <strong>API docs</strong>
+    <li><a href="/api/clear_beta"><code>clear_beta</code> version</a></li>
+
+    <strong>Releases</strong>
+    <li><a href="/changelog">All the releases</a></li>
+</ul>
+ </div>
+    </div>
+    <div id="rightpanel" class="column">
+        <div class="top-right">
+            <div class="inner">
+                 <header>
+    <a href="/" class="hide-when-burger-open">
+        <img src="/img/angrybot.svg" width="42" height="40" style="float: left;margin-right: 10px;" /> Byte Arena Docs
+    </a>
+    <div id="burger">
+        <img src="/img/burger.svg" width="26" height="26" />
+    </div>
+</header> 
+            </div>
+        </div>
+        <div class="bottom bottom-right">
+            <div class="inner">
+                
+<main>
+    <article>
+        <h1>Agent container</h1>
+        <div>
+            
+
+<p>Every agent in Byte Arena runs isolated in its own Docker container.</p>
+
+<p>A <code>Dockerfile</code> file is required at the root of your project in order to build your container and to deploy your agent.</p>
+
+<h2 id="sample-node-js-dockerfile">Sample Node.js Dockerfile</h2>
+
+<p>While your agent can be coded in whatever programming language you like, here is an example Dockerfile using the official Node.js (version 7) image:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="color:#66d9ef">FROM</span><span style="color:#e6db74"> node:7</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">ENV</span><span style="color:#e6db74"> NPM_CONFIG_LOGLEVEL error</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># /usr/app is the root of our code in the container</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">WORKDIR</span><span style="color:#e6db74"> /usr/app</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># Bundle our source code in the container</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>COPY . /usr/app/<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># Install dependencies</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> npm install<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># Build the source</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> npm run build<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># Tell Docker how to run our code</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">CMD</span><span style="color:#e6db74"> [ &#34;npm&#34;, &#34;start&#34; ]</span></code></pre></div>
+<p>As you can see, it&rsquo;s a pretty basic Dockerfile, bundling and compiling the source inside the container.</p>
+
+<ul>
+<li>These lines tell Docker to run our code inside a container featuring NodeJS 7, and sets to <code>error</code> the verbosity level for <code>npm</code>, the Node package manager</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="color:#66d9ef">FROM</span><span style="color:#e6db74"> node:7</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">ENV</span><span style="color:#e6db74"> NPM_CONFIG_LOGLEVEL error</span></code></pre></div>
+<ul>
+<li>We tell Docker that the commands of the Dockerfile will be executed in this folder.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="color:#66d9ef">WORKDIR</span><span style="color:#e6db74"> /usr/app</span></code></pre></div>
+<ul>
+<li>Our agent source code is copied inside the container, in <code>/usr/app</code></li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Dockerfile" data-lang="Dockerfile">COPY . /usr/app/</code></pre></div>
+<ul>
+<li>We use <code>npm</code> to install the NPM dependencies of our agent inside the container</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="color:#66d9ef">RUN</span> npm install</code></pre></div>
+<ul>
+<li>We then &ldquo;build&rdquo; the agent code, using Babel to transpile our ES6 code to ES5 code runnable by NodeJS.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="color:#66d9ef">RUN</span> npm run build</code></pre></div>
+<ul>
+<li>We finally tell Docker what command to issue to run our code when the container launches.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="color:#66d9ef">CMD</span><span style="color:#e6db74"> [ &#34;npm&#34;, &#34;start&#34; ]</span></code></pre></div>
+<h2 id="environment-variables-passed-to-the-container">Environment variables passed to the container</h2>
+
+<p>These environment variables are set on agent containers by Byte Arena:</p>
+
+<ul>
+<li><code>HOST</code>: the network host where the Byte Arena game server is running and reachable by the agent</li>
+<li><code>PORT</code>: the port number where the agent must connect on the game server</li>
+<li><code>AGENTID</code>: the agent random ID in use for the duration of a game</li>
+</ul>
+
+<h2 id="constraints-on-the-container">Constraints on the container</h2>
+
+<h3 id="network">Network</h3>
+
+<p>In a container, network is restricted; agents are not be able to connect to the internet, or communicate directly with other agents.</p>
+
+<p>The only network communications allowed are with the game server.</p>
+
+<h3 id="allowed-docker-intructions">Allowed Docker intructions</h3>
+
+<p>For security reason, you can only use the following instructions in your Dockerfile:</p>
+
+<ul>
+<li><code>COPY</code></li>
+<li><code>ENV</code></li>
+<li><code>FROM</code></li>
+<li><code>RUN</code></li>
+<li><code>CMD</code></li>
+<li><code>ENTRYPOINT</code></li>
+<li><code>WORKDIR</code></li>
+</ul>
+
+<p><strong>All other Docker instructions are banned</strong> (<code>VOLUME</code>, <code>PORT</code>, etc.). Your container won&rsquo;t be allowed on the online Byte Arena platform if your Dockerfile uses banned instructions.</p>
+
+<h3 id="file-system">File system</h3>
+
+<p>The container uses a read-only ephemeral filesystem.</p>
+
+<h3 id="capabilities">Capabilities</h3>
+
+<p>All Unix Capabilities are dropped and your container is not privileged.</p>
+
+<h3 id="unix-user">Unix user</h3>
+
+<p>You are not allowed to change the Unix user or group which will execute your program.</p>
+
+<p>The user <code>nobody</code> must be present in the container in order to run your program. Note that most Linux distribution have it out of the box.</p>
+
+        </div>
+    </article>
+</main>
+
+            </div>
+        </div>
+        <div class="footer-right">
+            <div class="inner">
+                <div class="left pull-left">
+                    <a href="https://get.bytearena.com">Get Byte Arena</a>
+                </div>
+                <div class="right pull-right">
+                    Edit this page on GitHub:
+                    <a href="https://github.com/ByteArena/doc.bytearena.com/blob/master/content/guides/agent-container/index.md" style="color: white;"> guides/agent-container/index.md</a>.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/menuactive.js" defer async></script>
+    <script src="/js/headinglinks.js" defer async></script>
+    <script src="/js/burger.js" defer async></script>
+    <script src="/js/youtube-async.js" defer async></script>
+</body>
+
+</html>

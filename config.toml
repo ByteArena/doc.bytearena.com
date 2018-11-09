@@ -3,3 +3,4 @@ languageCode = "en-us"
 title = "Byte Arena Docs"
 theme = "badoc"
 pygmentsCodeFences = true
+publishDir = "docs"

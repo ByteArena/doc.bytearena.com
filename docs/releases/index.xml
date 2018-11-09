@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Releases on Byte Arena Docs</title>
+    <link>http://example.org/releases/</link>
+    <description>Recent content in Releases on Byte Arena Docs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 03 Jan 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://example.org/releases/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>v0.0.10 Changelog</title>
+      <link>http://example.org/releases/changelog/v0.0.10/</link>
+      <pubDate>Wed, 03 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/releases/changelog/v0.0.10/</guid>
+      <description> Features  core#7 improved debug log ba#36 Assert docker version ba#39 Refactor: replaced &amp;ndash;dump-raw-comm by &amp;ndash;debug  Fixes  core#6 [deathmatch] Get rid of Title case in protocol messages core#5 [deathmatch] Get rid of Title case in messages ba#38 Get rid of titlecase in communications go-sdk#1 Updated SDK to match latest API.  </description>
+    </item>
+    
+    <item>
+      <title>v0.0.6 CLI Changelog</title>
+      <link>http://example.org/releases/changelog/v0.0.6/</link>
+      <pubDate>Fri, 01 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/releases/changelog/v0.0.6/</guid>
+      <description>Features Visualization  ByteArena/viz#4 Store user prefs (zoom and camera) Show the agent name Show the score Improved UI  ba train  Adding events into the perception Added agent gear specifications Sending shooting specification to the agent  Bug Fixes ba train  Show the CLI usage when no agent is specified Default TPS is now 20 Get rid of NaN values in the perception  ba map  Recover when the map file is corrupted  ba build  Fixed building .</description>
+    </item>
+    
+    <item>
+      <title>v0.0.7 CLI Changelog</title>
+      <link>http://example.org/releases/changelog/v0.0.7/</link>
+      <pubDate>Fri, 01 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/releases/changelog/v0.0.7/</guid>
+      <description> Fix Visualization  ByteArena/viz#10 zoom/change camera using shortcuts on Firefox ByteArena/viz#9 model.json cannot be decoded under Firefox  bytearena-sdk  Renamed the takeActions method into do  ba train  Renamed the mutations key in the protocol into actions.  Features  ByteArena/ba#28 agent manifest  ba train  ByteArena/ba#24 color output in the console  Visualization  Camera: change which agent you follow Show game events  </description>
+    </item>
+    
+    <item>
+      <title>v0.0.8 CLI Changelog</title>
+      <link>http://example.org/releases/changelog/v0.0.8/</link>
+      <pubDate>Fri, 01 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/releases/changelog/v0.0.8/</guid>
+      <description> Features ba train  ByteArena/ba#31 Allow to specify a ip to bind to for the viz (--viz-host)  </description>
+    </item>
+    
+    <item>
+      <title>v0.0.9 CLI Changelog</title>
+      <link>http://example.org/releases/changelog/v0.0.9/</link>
+      <pubDate>Fri, 01 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/releases/changelog/v0.0.9/</guid>
+      <description> Features ba train  ByteArena/ba#34 quiet mode for output (--quiet)  </description>
+    </item>
+    
+  </channel>
+</rss>

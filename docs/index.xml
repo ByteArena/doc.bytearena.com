@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Byte Arena on Byte Arena Docs</title>
+    <link>http://example.org/</link>
+    <description>Recent content in Byte Arena on Byte Arena Docs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 03 Jan 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>v0.0.10 Changelog</title>
+      <link>http://example.org/releases/changelog/v0.0.10/</link>
+      <pubDate>Wed, 03 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/releases/changelog/v0.0.10/</guid>
+      <description> Features  core#7 improved debug log ba#36 Assert docker version ba#39 Refactor: replaced &amp;ndash;dump-raw-comm by &amp;ndash;debug  Fixes  core#6 [deathmatch] Get rid of Title case in protocol messages core#5 [deathmatch] Get rid of Title case in messages ba#38 Get rid of titlecase in communications go-sdk#1 Updated SDK to match latest API.  </description>
+    </item>
+    
+    <item>
+      <title>Agent configuration</title>
+      <link>http://example.org/guides/agent-configuration/</link>
+      <pubDate>Wed, 20 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/guides/agent-configuration/</guid>
+      <description>This is the configuration of the Nodejs sample agent:
+{ &amp;#34;id&amp;#34;: &amp;#34;sampleagent-deathmatch-nodejs&amp;#34;, &amp;#34;name&amp;#34;: &amp;#34;Sample deathmatch agent for Node.js&amp;#34;, &amp;#34;license&amp;#34;: &amp;#34;MIT&amp;#34;, &amp;#34;language&amp;#34;: &amp;#34;nodejs&amp;#34;, &amp;#34;gamemode&amp;#34;: &amp;#34;deathmatch&amp;#34;, &amp;#34;repourl&amp;#34;: &amp;#34;https://github.com/ByteArena/sampleagent-deathmatch-nodejs&amp;#34;, &amp;#34;description&amp;#34;: &amp;#34;Sample Node.js agent&amp;#34;, &amp;#34;avatarurl&amp;#34;: &amp;#34;https://avatars1.githubusercontent.com/u/28099873&amp;#34; } Note that you need to provide at least the id and name key in the configuration of your agent.
+Changing the identifier of your agent The identifier of your agent is stored in the id key.</description>
+    </item>
+    
+    <item>
+      <title>Agent container</title>
+      <link>http://example.org/guides/agent-container/</link>
+      <pubDate>Fri, 01 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/guides/agent-container/</guid>
+      <description>Every agent in Byte Arena runs isolated in its own Docker container.
+A Dockerfile file is required at the root of your project in order to build your container and to deploy your agent.
+Sample Node.js Dockerfile While your agent can be coded in whatever programming language you like, here is an example Dockerfile using the official Node.js (version 7) image:
+FROMnode:7ENVNPM_CONFIG_LOGLEVEL error# /usr/app is the root of our code in the containerWORKDIR/usr/app# Bundle our source code in the containerCOPY .</description>
+    </item>
+    
+    <item>
+      <title>Agent training</title>
+      <link>http://example.org/guides/agent-training/</link>
+      <pubDate>Fri, 01 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/guides/agent-training/</guid>
+      <description>Run your agent You can start your agent and the game server by running the following command:
+$ ba train -agent powerful-jennet Here is an example of the ouput:
+ A browser should open at http://localhost:8080/arena/1, displaying the Byte Arena visualization, where you will see your agent.
+Note: you can disable that behavior by passing the --no-browser argument at the end of the command.
+Increase the game loop frequency By default the ticks per seconds configuration is set to 20.</description>
+    </item>
+    
+    <item>
+      <title>Aiming and shooting</title>
+      <link>http://example.org/guides/aiming-shooting/</link>
+      <pubDate>Fri, 01 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/guides/aiming-shooting/</guid>
+      <description>In the Basic Obstacle Avoidance guide, we implemented basic navigational capabilities in our agent.
+In this guide, we pursue the development of our agent, giving him aiming and shooting abilities.
+If you&amp;rsquo;ve not done it already, please complete the Basic Obstacle Avoidance guide before going on with this one.
+Basic implementation Here&amp;rsquo;s what we&amp;rsquo;ll add to our src/index.js:
+// ...  agent.on(&amp;#34;perception&amp;#34;, perception =&amp;gt; { // ...  const shooting = shoot(perception); if(shooting) actions.</description>
+    </item>
+    
+    <item>
+      <title>Basic obstacle avoidance</title>
+      <link>http://example.org/guides/basic-obstacle-avoidance/</link>
+      <pubDate>Fri, 01 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/guides/basic-obstacle-avoidance/</guid>
+      <description>In the Getting Started with Byte Arena guide, we had a look on how to scaffold a pretty basic agent that blindly strolls through the Game World.
+In this guide, we pursue the development of our agent, adding basic obstacle avoidance capabilities.
+If you&amp;rsquo;ve not done it already, please complete the Getting Started guide before going on with this one.
+The final code Here&amp;rsquo;s what our src/index.js will look like when we are finished with this guide.</description>
+    </item>
+    
+    <item>
+      <title>Beta user</title>
+      <link>http://example.org/beta-user/</link>
+      <pubDate>Fri, 01 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/beta-user/</guid>
+      <description>Hi there,
+First, we want to thank you for your interest in Byte Arena.
+We recommend you to join our community on Slack, you can ask an invite here: ByteArena/community#2.
+How to start? To get you ready as fast as possible, please take a look at the &amp;ldquo;Quickstart&amp;rdquo; section in the menu.
+What if you find a bug? Please report it using the link provided in the error message, or in the case the error isn&amp;rsquo;t handled properly just drop us a line.</description>
+    </item>
+    
+    <item>
+      <title>Byte Arena API clear_beta release</title>
+      <link>http://example.org/api/clear_beta/</link>
+      <pubDate>Fri, 01 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/api/clear_beta/</guid>
+      <description>This is the Byte Arena API for the clear_beta release.
+ Handshake Perception  </description>
+    </item>
+    
+    <item>
+      <title>Changelogs</title>
+      <link>http://example.org/changelog/</link>
+      <pubDate>Fri, 01 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/changelog/</guid>
+      <description> v0.0.10 v0.0.9 v0.0.8 v0.0.7 v0.0.6  </description>
+    </item>
+    
+    <item>
+      <title>Competition</title>
+      <link>http://example.org/guides/competition/</link>
+      <pubDate>Fri, 01 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/guides/competition/</guid>
+      <description> TODOC </description>
+    </item>
+    
+    <item>
+      <title>Contributing</title>
+      <link>http://example.org/guides/contributing/</link>
+      <pubDate>Fri, 01 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/guides/contributing/</guid>
+      <description>The code You&amp;rsquo;ll find the Byte Arena code on GitHub here: https://github.com/ByteArena/ba
+License The Byte Arena code is licensed under the Creative Commons Attribution-NonCommercial 4.0 International License.
+To view a copy of this license, visit http://creativecommons.org/licenses/by-nc/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.</description>
+    </item>
+    
+    <item>
+      <title>Deathmatch game mode</title>
+      <link>http://example.org/guides/deathmatch-game-mode/</link>
+      <pubDate>Fri, 01 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/guides/deathmatch-game-mode/</guid>
+      <description>In its current state, Byte Arena features a traditional Deathmatch Game Mode.
+In the future, more Game Modes will be supported, including Team Deathmatch, Capture The Flag and Speed Race.
+Deathmatch The Goal The goal of your agent is to be ranked #1 among the competitors of a game, based on its score.
+The Scoring You get 1 point for each frag you make, and lose 1 point each time you&amp;rsquo;re fragged.</description>
+    </item>
+    
+    <item>
+      <title>Game World</title>
+      <link>http://example.org/guides/game-world/</link>
+      <pubDate>Fri, 01 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/guides/game-world/</guid>
+      <description> TODOC </description>
+    </item>
+    
+    <item>
+      <title>Game events</title>
+      <link>http://example.org/guides/game-events/</link>
+      <pubDate>Fri, 01 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/guides/game-events/</guid>
+      <description>During the game your agent will be notified of various kind of actions, for example:
+ You killed an agent Occasionally, your score You died  You will find your messages directly into the perception, see the perception.
+ this section is not complete yet.
+ </description>
+    </item>
+    
+    <item>
+      <title>Getting started with Byte Arena</title>
+      <link>http://example.org/guides/getting-started/</link>
+      <pubDate>Fri, 01 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/guides/getting-started/</guid>
+      <description>We will be going through the implementation of a basic agent for Byte Arena.
+While your agent can be coded in whatever programming language you like, this section will show you to implement one in JavaScript.
+Prerequisites  You have installed the Byte Arena CLI ba. Refer to Installing Byte Arena for instructions on how to install it. You have a running Docker daemon (please refer to Docker&amp;rsquo;s documentation to install it if not).</description>
+    </item>
+    
+    <item>
+      <title>Handshake (clear_beta release)</title>
+      <link>http://example.org/api/clear_beta/handshake/</link>
+      <pubDate>Fri, 01 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/api/clear_beta/handshake/</guid>
+      <description> Handshake structure After the handshake some data will be send back to the agent, with the following properties:
+Specs    Property name Type Representation in the JSON     maxspeed float64 Number   maxsteeringforce float64 Number   maxangularvelocity float64 Number   visionradius float64 Number   visionangle Angle Number (radian)   bodyradius float64 Number   maxshootenergy float64 Number   shootrecoveryrate float64 Number   Gear GearSpecs Object    GearSpecs    Property name Type Representation in the JSON     Genre string string   Kind string string   Specs unknown Object    GunSpecs    Property name Type Representation in the JSON     shootcost float64 Number   shootcooldown int Number   projectilespeed float64 Number   projectiledamage float64 Number   projectilerange float64 Number    </description>
+    </item>
+    
+    <item>
+      <title>Installing / Upgrading Byte Arena</title>
+      <link>http://example.org/guides/installing-bytearena/</link>
+      <pubDate>Fri, 01 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/guides/installing-bytearena/</guid>
+      <description>Byte Arena is both an Online Platform, and a CLI tool you can use to code and train your agents on your own machine.
+Follow these instructions to install or upgrade the Byte Arena CLI tool on your machine.
+Install or upgrade with a script To install or upgrade ByteArena, execute the following command in your terminal:
+curl -s https://get.bytearena.com/sh | bash - We assume that you have curl and bash installed on your machine.</description>
+    </item>
+    
+    <item>
+      <title>Online platform</title>
+      <link>http://example.org/guides/online-platform/</link>
+      <pubDate>Fri, 01 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/guides/online-platform/</guid>
+      <description> TODOC </description>
+    </item>
+    
+    <item>
+      <title>Perception specification</title>
+      <link>http://example.org/api/clear_beta/perception/</link>
+      <pubDate>Fri, 01 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/api/clear_beta/perception/</guid>
+      <description> Perception structure The root object is called perception, it&amp;rsquo;s the object you receive in argument in the onTick function.
+Perception    Property name Type Representation in the JSON     score int Number   energy float64 Number   velocity Vector2 Array of float64 (x, y)   azimuth float64 Number   vision array of VisionItem Array of Object   shootenergy float64 Number   shootcooldown int Number   messages array of MessageWrapper Array of Object    VisionItem    Property name Type Representation in the JSON     tag string String   nearedge Vector2 Array of float64 (x, y)   center Vector2 Array of float64 (x, y)   faredge Vector2 Array of float64 (x, y)   velocity Vector2 Array of float64 (x, y)    MessageWrapper    Property name Type Representation in the JSON     subject string String   body unknown Object    Score    Property name Type Representation in the JSON     value int Number    Stats    Property name Type Representation in the JSON     distanceTravelled float64 Number    YouAreRespawning    Property name Type Representation in the JSON     respawningin int Number    YouHaveBeenFragged    Property name Type Representation in the JSON     by string String    YouHaveBeenHit    Property name Type Representation in the JSON     kind string String   comingfrom float64 Number   damage float64 Number    YouHaveFragged    Property name Type Representation in the JSON     who string String    YouHaveHit    Property name Type Representation in the JSON     Who string String    YouHaveRespawned </description>
+    </item>
+    
+    <item>
+      <title>The Byte Arena CLI</title>
+      <link>http://example.org/guides/bytearena-cli/</link>
+      <pubDate>Fri, 01 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/guides/bytearena-cli/</guid>
+      <description>Install / Upgrade Refer to Installing / Upgrading Byte Arena for instructions.
+Map Update the local maps The command is: ba map update.
+List your local maps The command is: ba map list.
+Training Please refer to the Agent Training.
+Building Please refer to the Building the agent.
+Scaffolding Please refer to the Building the agent.</description>
+    </item>
+    
+    <item>
+      <title>The Byte Arena agent</title>
+      <link>http://example.org/guides/the-agent/</link>
+      <pubDate>Fri, 01 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/guides/the-agent/</guid>
+      <description> TODOC </description>
+    </item>
+    
+    <item>
+      <title>Visualization</title>
+      <link>http://example.org/guides/visualization/</link>
+      <pubDate>Fri, 01 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/guides/visualization/</guid>
+      <description> TODOC </description>
+    </item>
+    
+    <item>
+      <title>Where to go from here</title>
+      <link>http://example.org/guides/quickstart-next-steps/</link>
+      <pubDate>Fri, 01 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/guides/quickstart-next-steps/</guid>
+      <description>Congratulations! You&amp;rsquo;ve completed the Byte Arena Quickstart guide and you know how to build an agent, make it wander through the World, and make it a basic shooter.
+Now for a real challenge: implement your own algorithms and strategies to improve its capacities. Be ready to compete when the Byte Arena Online Platform will open!
+Meet the Community To discuss it with other beta pilots, meet us on Slack at https://bytearena.</description>
+    </item>
+    
+    <item>
+      <title>v0.0.6 CLI Changelog</title>
+      <link>http://example.org/releases/changelog/v0.0.6/</link>
+      <pubDate>Fri, 01 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/releases/changelog/v0.0.6/</guid>
+      <description>Features Visualization  ByteArena/viz#4 Store user prefs (zoom and camera) Show the agent name Show the score Improved UI  ba train  Adding events into the perception Added agent gear specifications Sending shooting specification to the agent  Bug Fixes ba train  Show the CLI usage when no agent is specified Default TPS is now 20 Get rid of NaN values in the perception  ba map  Recover when the map file is corrupted  ba build  Fixed building .</description>
+    </item>
+    
+    <item>
+      <title>v0.0.7 CLI Changelog</title>
+      <link>http://example.org/releases/changelog/v0.0.7/</link>
+      <pubDate>Fri, 01 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/releases/changelog/v0.0.7/</guid>
+      <description> Fix Visualization  ByteArena/viz#10 zoom/change camera using shortcuts on Firefox ByteArena/viz#9 model.json cannot be decoded under Firefox  bytearena-sdk  Renamed the takeActions method into do  ba train  Renamed the mutations key in the protocol into actions.  Features  ByteArena/ba#28 agent manifest  ba train  ByteArena/ba#24 color output in the console  Visualization  Camera: change which agent you follow Show game events  </description>
+    </item>
+    
+    <item>
+      <title>v0.0.8 CLI Changelog</title>
+      <link>http://example.org/releases/changelog/v0.0.8/</link>
+      <pubDate>Fri, 01 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/releases/changelog/v0.0.8/</guid>
+      <description> Features ba train  ByteArena/ba#31 Allow to specify a ip to bind to for the viz (--viz-host)  </description>
+    </item>
+    
+    <item>
+      <title>v0.0.9 CLI Changelog</title>
+      <link>http://example.org/releases/changelog/v0.0.9/</link>
+      <pubDate>Fri, 01 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/releases/changelog/v0.0.9/</guid>
+      <description> Features ba train  ByteArena/ba#34 quiet mode for output (--quiet)  </description>
+    </item>
+    
+  </channel>
+</rss>
